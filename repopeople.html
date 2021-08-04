@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Button</button>
+    <div id="pro"></div>
+
+    <script class="item">
+        
+      
+        function showApiText(){
+            
+            // Initialize Object
+            let xhr = new XMLHttpRequest();
+            
+            // Set the params and method
+            xhr.open("GET", "https://api.github.com/users", true);
+            // on successful load show data on webpage
+            xhr.onload = function(){
+              
+                
+                if(this.status = 200){
+                    let content = "";
+                    let data = JSON.parse(this.responseText);
+                    for(var id =0 ; id<5;id++){
+                        
+                        content += 
+                        `
+               
+                        <div class =b>
+                            <img  src='${data[id].avatar_url}' width="100" height="100">
+                      
+                            <h5>ID = ${data[id].id}</h5>
+                            <h5>Name = ${data[id].login}</h5>
+                        </div>
+               
+                              
+                        `;
+                    }
+                    document.getElementById("pro").innerHTML = content;
+                }
+            
+            }
+            // Send the request
+            xhr.send();
+        
+        }
+        document.getElementById("btn").addEventListener('click',showApiText);
+      
+    </script>
+</body>
+</html>
